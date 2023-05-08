@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+    </style>
+</head>
+<body>
+    <button onclick="cookieclick()" style="background-color: transparent; border-color: transparent; cursor: pointer;">
+        <img src="https://firebasestorage.googleapis.com/v0/b/cookie-clicker-16ded.appspot.com/o/cookie-removebg-preview.png?alt=media&token=2edf91c8-e13b-4d98-a93f-ec9dfc8df0c6">
+    </button>
+    <h1 id="cookieCount">Cookies: 0</h1>
+<button id="myBtn">Open Shop</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Cookie Shop</h2>
+    </div>
+    <div class="modal-body">
+      <div class="upgrade">
+        <span style="padding-right: 40px;" id="grannie">Grannie (+1 Cookies) 10 cookies; You have 0</span>
+        <button onclick="grannieUpgrade()">Upgrade</button>
+      </div>
+      <br>
+      <div class="upgrade">
+        <span style="padding-right: 40px;" id="farmer">Farmer (+2 Cookies) 100 cookies; You have 0</span>
+        <button onclick="farmersUpgrade()">Upgrade</button>
+      </div>
+      <br>
+      <div class="Crazy Cookie (+5 Cookies)">
+        <span style="padding-right: 40px;" id="crazyCookie">Crazy Cookie (+5 Cookies) 10k cookies; You have 0</span>
+        <button onclick="crazyCookiesUpgrade()">Upgrade</button>
+      </div>
+      <br>
+      <div class="upgrade">
+        <span style="padding-right: 40px;" id="mult">Multipler (x2 Cookies) 100k cookies; You have 0</span>
+        <button class="multiplerUpgrade()">Upgrade</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+    <h1 id="notif"></h1>
+    <script>
+        let cookies = 0;
+        let grannies = 0;
+        let farmers = 0;
+        let crazyCookies = 0;
+        let multiplier = 1;
+        let granniesCost = 10;
+        let farmersCost = 100;
+        let crazyCookiesCost = 10000;
+        let multiplierCost = 100000;
+        let formula = cookies+(1 + grannies + [farmers * 2] + [crazyCookies*5])*multiplier
+        function cookieclick() {
+            cookies1 = grannies+(farmers * 2)+(crazyCookies*5)
+            cookies2 = cookies1 * multiplier
+            cookies = 1+cookies+cookies2
+            document.getElementById("cookieCount").innerText = `Cookies: ${cookies}`
+                        if (cookies >= granniesCost || cookies >= farmersCost || cookies >= crazyCookiesCost || cookies >= multiplierCost)
+                document.getElementById("notif").innerText = 'A upgrade is avalible!'
+            else
+                document.getElementById("notif").innerText = ""
+        }
+
+        function grannieUpgrade() {
+            if (cookies < granniesCost)
+                return;
+            cookies = cookies - granniesCost
+            grannies = grannies + 1 
+            granniesCost = granniesCost * 2
+            document.getElementById("cookieCount").innerText = `Cookies: ${cookies}`
+            document.getElementById('grannie').innerText = `Grannie (+1 Cookies) ${granniesCost} cookies; You have ${grannies}`
+            if (cookies < granniesCost)
+                document.getElementById("notif").innerText = ""
+        }
+
+        function farmersUpgrade() {
+            if (cookies < farmersCost)
+                return;
+            cookies = cookies - farmersCost
+            farmers = farmers + 1
+            farmersCost = farmersCost * 2
+            document.getElementById("cookieCount").innerText = `Cookies: ${cookies}`
+            document.getElementById('farmer').innerText =  `Farmer (+2 Cookies) ${farmersCost} cookies; You have ${farmers}`
+            if (cookies < farmersCost)
+                document.getElementById("notif").innerText = ""
+        }
+
+        function crazyCookiesUpgrade() {
+            if (cookies < crazyCookiesCost)
+                return;
+            cookies = cookies - crazyCookiesCost
+            crazyCookies = crazyCookies + 1
+            crazyCookiesCost = crazyCookiesCost * 2
+            document.getElementById("cookieCount").innerText = `Cookies: ${cookies}`
+            document.getElementById('crazyCookie').innerText = `Crazy Cookie (+5 Cookies) ${crazyCookiesCost} cookies; You have ${crazyCookies}` 
+            if (cookies < crazyCookiesCost)
+                document.getElementById("notif").innerText = ""
+        }
+
+        function multiplerUpgrade() {
+            if (cookies < multiplierCost)
+                return;
+            cookies = cookies - multiplierCost
+            multiplier = multipler + 1
+            multiplierCost = multiplierCost * 3
+            document.getElementById("cookieCount").innerText = `Cookies: ${cookies}`
+            document.getElementById('mult').innerText = `Multipler (x2 Cookies) ${multiplierCost} cookies; You have ${multiplier}`
+            if (cookies < multiplierCost)
+                document.getElementById("notif").innerText = ""
+        }
+     // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+    </script>
+</body>
+</html>
