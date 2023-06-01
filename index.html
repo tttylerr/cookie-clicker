@@ -56,7 +56,10 @@
   color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+  padding: 2px 16px;
+  background-color: palegreen;
+}
 
 .modal-footer {
   padding: 2px 16px;
@@ -84,6 +87,25 @@
   from {opacity: 0} 
   to {opacity: 1}
 }
+.shopBtn {
+  background-color:#4CAF50;
+  padding:16px;
+  border-radius:6px;
+  font-size:16px;
+  border:2px solid black
+}
+.upgradeBtn {
+  background-color: #4CAF50;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: 2px solid black 
+}
+body {
+  background-color: #C0FFC0;
+  font-family:sans-serif;
+}
+
     </style>
 </head>
 <body>
@@ -91,7 +113,7 @@
         <img src="https://firebasestorage.googleapis.com/v0/b/cookie-clicker-16ded.appspot.com/o/cookie-removebg-preview.png?alt=media&token=2edf91c8-e13b-4d98-a93f-ec9dfc8df0c6">
     </button>
     <h1 id="cookieCount">Cookies: 0</h1>
-<button id="myBtn">Open Shop</button>
+<button id="myBtn" class="shopBtn">Open Shop</button>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -105,22 +127,22 @@
     <div class="modal-body">
       <div class="upgrade">
         <span style="padding-right: 40px;" id="grannie">Grannie (+1 Cookies) 10 cookies; You have 0</span>
-        <button onclick="grannieUpgrade()">Upgrade</button>
+        <button class="upgradeBtn" onclick="grannieUpgrade()">Upgrade</button>
       </div>
       <br>
       <div class="upgrade">
         <span style="padding-right: 40px;" id="farmer">Farmer (+2 Cookies) 100 cookies; You have 0</span>
-        <button onclick="farmersUpgrade()">Upgrade</button>
+        <button class="upgradeBtn" onclick="farmersUpgrade()">Upgrade</button>
       </div>
       <br>
       <div class="Crazy Cookie (+5 Cookies)">
         <span style="padding-right: 40px;" id="crazyCookie">Crazy Cookie (+5 Cookies) 10k cookies; You have 0</span>
-        <button onclick="crazyCookiesUpgrade()">Upgrade</button>
+        <button class="upgradeBtn" onclick="crazyCookiesUpgrade()">Upgrade</button>
       </div>
       <br>
       <div class="upgrade">
         <span style="padding-right: 40px;" id="mult">Multipler (x2 Cookies) 100k cookies; You have 0</span>
-        <button class="multiplerUpgrade()">Upgrade</button>
+        <button class="upgradeBtn" class="multiplerUpgrade()">Upgrade</button>
       </div>
     </div>
   </div>
@@ -136,8 +158,8 @@
         let farmers = 0;
         let crazyCookies = 0;
         let multiplier = 1;
-        let granniesCost = 10;
-        let farmersCost = 100;
+        let granniesCost = 15;
+        let farmersCost = 200;
         let crazyCookiesCost = 10000;
         let multiplierCost = 100000;
         let formula = cookies+(1 + grannies + [farmers * 2] + [crazyCookies*5])*multiplier
